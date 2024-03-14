@@ -1,0 +1,9 @@
+name: cloudwalk_mobile_test_app
+publish_to: none
+description: Apod workspace managed by Melos CLI
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+
+dev_dependencies:
+  melos: ^5.1.0

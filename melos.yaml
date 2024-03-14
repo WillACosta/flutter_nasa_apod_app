@@ -1,0 +1,37 @@
+name: cloudwalk_mobile_test_app
+
+packages:
+  - "apps/apod"
+  - "packages/**/**"
+
+command:
+  bootstrap:
+    runPubGetInParallel: true
+
+scripts:
+  test:
+    run: melos exec --fail-fast -- "flutter test" --no-pub
+    description: Run Flutter tests for a specific package in this workspace.
+    packageFilters:
+      dirExists: test
+
+  test:all:
+    run: melos run test:pkg --no-select
+    description: Run `flutter test` in all packages
+
+  codegen:
+    run: melos exec -c 1 --flutter -- "flutter pub run build_runner build --delete-conflicting-outputs"
+    description: Build all generated files for specific package
+    packageFilters:
+      dependsOn: build_runner
+
+  codegen:all:
+    run: melos run codegen --no-select
+
+  post clean: melos exec -c 6 -- "flutter clean" && melos run clean:codegen
+
+  clean:codegen:
+    run: melos exec -- "sh \$MELOS_ROOT_PATH/scripts/clean_codegen.sh"
+    description: Clean up all generated files from packages
+    packageFilters:
+      dependsOn: build_runner
