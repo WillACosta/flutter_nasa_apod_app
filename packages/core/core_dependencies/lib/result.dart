@@ -1,0 +1,1 @@
+export 'package:result_dart/result_dart.dart';

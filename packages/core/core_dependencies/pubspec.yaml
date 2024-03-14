@@ -1,0 +1,22 @@
+name: core_dependencies
+description: common dependencies for all packages
+publish_to: none
+version: 0.0.1
+
+environment:
+  sdk: ">=3.3.1 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cached_network_image: ^3.3.1
+  chopper: ^6.1.4
+  equatable: ^2.0.5
+  http: ^0.13.6
+  http_interceptor: ^1.0.2
+  result_dart: ^1.1.0
+  shimmer: ^3.0.0
+
+flutter:
