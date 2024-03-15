@@ -5,6 +5,7 @@
     "cloudwalk, apod, Apod",
     "codegen",
     "cupertino",
-    "melos"
+    "melos",
+    "usecase"
   ]
 }
