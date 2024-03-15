@@ -73,10 +73,24 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  core_commons:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/core/core_commons"
+      relative: true
+    source: path
+    version: "0.0.1"
   core_dependencies:
     dependency: "direct main"
     description:
       path: "../../packages/core/core_dependencies"
+      relative: true
+    source: path
+    version: "0.0.1"
+  core_network:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/core/core_network"
       relative: true
     source: path
     version: "0.0.1"
@@ -112,6 +126,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  feature_media:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/feature/feature_media"
+      relative: true
+    source: path
+    version: "0.0.1"
   ffi:
     dependency: transitive
     description:
@@ -455,6 +476,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  ui_core:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/ui/ui_core"
+      relative: true
+    source: path
+    version: "0.0.1"
+  ui_media:
+    dependency: "direct main"
+    description:
+      path: "../../packages/ui/ui_media"
+      relative: true
+    source: path
+    version: "0.0.1"
   uuid:
     dependency: transitive
     description:
