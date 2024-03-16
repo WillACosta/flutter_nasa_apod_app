@@ -42,7 +42,7 @@ class GridItem extends StatelessWidget {
           ),
           label != null
               ? Positioned(
-                  bottom: 25,
+                  bottom: 28,
                   left: 10,
                   child: ApodText.bodySmallest(
                     label!,

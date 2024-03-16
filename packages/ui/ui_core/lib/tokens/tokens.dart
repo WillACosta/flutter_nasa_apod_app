@@ -1,2 +1,2 @@
-export 'color/app_color_scheme.dart';
+export 'color/color.dart';
 export 'spacing/spacing.dart';

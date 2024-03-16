@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:ui_media/presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
 
+import '../../search/search.dart';
 import '../components/components.dart';
 
 class MediaGalleryView extends StatefulWidget {
@@ -21,7 +22,7 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0, 0, 0, 0.4),
+        backgroundColor: ApodColors.appBarDarkColor,
         elevation: 0,
         toolbarHeight: 65,
         flexibleSpace: ClipRRect(
@@ -30,13 +31,7 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
             child: Container(color: Colors.transparent),
           ),
         ),
-        title: ApodText.body(
-          'Media Gallery',
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(ApodIcons.search)),
-        ],
+        title: const ApodSearchView(),
       ),
       body: Container(
         padding: ApodInsideSpacing.md,
