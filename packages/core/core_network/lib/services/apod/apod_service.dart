@@ -19,7 +19,6 @@ abstract class ApodService extends ChopperService {
   @Get()
   @FactoryConverter(response: mapResponseToListNetworkMedia)
   AsyncResponseOf<List<NetworkMedia>> getMedias(
-    @Query('start_date') String startDate,
-    @Query('end_date') String endDate,
+    @Query('count') int count,
   );
 }

@@ -17,6 +17,9 @@ dependencies:
   core_dependencies:
     path: "../../core/core_dependencies"
 
+  core_di:
+    path: "../../core/core_di"
+
   feature_media:
     path: "../../feature/feature_media"
 

@@ -9,6 +9,7 @@
       "request": "launch",
       "type": "dart",
       "program": "apps/apod/lib/main.dart",
+      "toolArgs": ["--dart-define-from-file", ".env"],
       "flutterMode": "debug"
     },
     {
@@ -16,6 +17,7 @@
       "request": "launch",
       "type": "dart",
       "program": "apps/apod/lib/main.dart",
+      "toolArgs": ["--dart-define-from-file", ".env"],
       "flutterMode": "profile"
     },
     {
@@ -23,6 +25,7 @@
       "request": "launch",
       "type": "dart",
       "program": "apps/apod/lib/main.dart",
+      "toolArgs": ["--dart-define-from-file", ".env"],
       "flutterMode": "release"
     }
   ]

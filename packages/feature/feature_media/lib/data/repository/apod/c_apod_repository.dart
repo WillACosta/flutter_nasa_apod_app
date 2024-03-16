@@ -9,11 +9,10 @@ class CApodRepository implements ApodRepository {
 
   @override
   AsyncResultOf<List<DomainMedia>> getMedias({
-    required String startDate,
-    required String endDate,
+    required int resultsCount,
   }) async {
     final result = await safeApiCall(
-      () => _apodService.getMedias(startDate, endDate),
+      () => _apodService.getMedias(resultsCount),
     );
 
     return result.map((response) => response.toDomain());

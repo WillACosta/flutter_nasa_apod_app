@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auto_injector:
+    dependency: transitive
+    description:
+      name: auto_injector
+      sha256: "197767e850635d2fe7d56be00afdd75e025ef755d4c9330b73ce1f151988bac3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   boolean_selector:
     dependency: transitive
     description:
@@ -84,6 +92,13 @@ packages:
     dependency: "direct main"
     description:
       path: "../../packages/core/core_dependencies"
+      relative: true
+    source: path
+    version: "0.0.1"
+  core_di:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/core/core_di"
       relative: true
     source: path
     version: "0.0.1"
@@ -186,6 +201,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  flutter_modular:
+    dependency: transitive
+    description:
+      name: flutter_modular
+      sha256: ac6298ce1abd414286ee5a554fc45e81e358461979b5d4e02c8abd685e3b23f2
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -295,6 +318,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  modular_core:
+    dependency: transitive
+    description:
+      name: modular_core
+      sha256: "5baaa460ac9d85d457d6864ef41a2194b8115a6bdeb585a684789f2d9004c892"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.2"
   octo_image:
     dependency: transitive
     description:

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:core_commons/core_commons.dart';
+import 'package:core_dependencies/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:ui_media/presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
@@ -15,7 +17,13 @@ class MediaGalleryView extends StatefulWidget {
 }
 
 class _MediaGalleryViewState extends State<MediaGalleryView> {
-  final _viewModel = MediaGalleryViewModel();
+  final _viewModel = Modular.get<MediaGalleryViewModel>();
+
+  @override
+  void initState() {
+    _viewModel.getMedias();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,30 +43,41 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
       ),
       body: Container(
         padding: ApodInsideSpacing.md,
-        child: FutureBuilder(
-          future: _viewModel.getMedias(),
-          builder: (_, snapshot) {
-            if (snapshot.hasData) {
-              final medias = snapshot.data!;
+        child: ValueListenableBuilder(
+          valueListenable: _viewModel.state,
+          builder: (_, state, __) {
+            final medias = _viewModel.mediaList;
 
-              return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: medias.length,
-                itemBuilder: (_, index) => GridItem(
-                  index: index,
-                  label: medias[index].title,
-                  itemsLength: medias.length,
-                  isImage: medias[index].isImage,
-                  itemUrl: medias[index].urls.defaultUrl,
+            if (state == UiState.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (medias.isEmpty) {
+              return Center(
+                child: ApodText.body(
+                  'there is nothing here...',
+                  color: Theme.of(context).colorScheme.outline,
                 ),
               );
             }
 
-            return const Center(child: CircularProgressIndicator());
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemCount: medias.length,
+              itemBuilder: (_, index) => GridItem(
+                index: index,
+                label: medias[index].title,
+                itemsLength: medias.length,
+                isImage: medias[index].isImage,
+                itemUrl: medias[index].urls.defaultUrl,
+              ),
+            );
           },
         ),
       ),

@@ -4,7 +4,6 @@ import '../../../domain/domain.dart';
 
 abstract interface class ApodRepository {
   AsyncResultOf<List<DomainMedia>> getMedias({
-    required String startDate,
-    required String endDate,
+    required int resultsCount,
   });
 }
