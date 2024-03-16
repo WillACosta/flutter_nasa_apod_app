@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ui_core/ui_core.dart';
 import 'package:ui_media/presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
 
 import '../components/components.dart';
@@ -20,7 +21,7 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(255, 255, 255, 0.4),
+        backgroundColor: const Color.fromRGBO(0, 0, 0, 0.4),
         elevation: 0,
         toolbarHeight: 65,
         flexibleSpace: ClipRRect(
@@ -29,13 +30,16 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
             child: Container(color: Colors.transparent),
           ),
         ),
-        title: const Text('Media Gallery'),
+        title: ApodText.body(
+          'Media Gallery',
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          IconButton(onPressed: () {}, icon: const Icon(ApodIcons.search)),
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.only(top: 20, left: 4, right: 4),
+        padding: ApodInsideSpacing.md,
         child: FutureBuilder(
           future: _viewModel.getMedias(),
           builder: (_, snapshot) {

@@ -5,8 +5,8 @@ import '../../layouts/layouts.dart';
 
 enum ImageType { network, asset }
 
-class ImageViewAtom extends StatelessWidget {
-  const ImageViewAtom({
+class ApodImageView extends StatelessWidget {
+  const ApodImageView({
     super.key,
     this.type = ImageType.network,
     required this.imageUrl,

@@ -18,6 +18,9 @@ dependencies:
   ui_media:
     path: "../../packages/ui/ui_media"
 
+  ui_core:
+    path: "../../packages/ui/ui_core"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

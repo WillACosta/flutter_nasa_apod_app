@@ -19,34 +19,6 @@ class GridItem extends StatelessWidget {
   final bool isImage;
   final VoidCallback? onTap;
 
-  BorderRadius getItemBorderRadius(int index, int length) {
-    if (index == 0) {
-      return const BorderRadius.only(
-        topLeft: Radius.circular(10),
-      );
-    }
-
-    if (index == 1) {
-      return const BorderRadius.only(
-        topRight: Radius.circular(10),
-      );
-    }
-
-    if (index == length - 1) {
-      return const BorderRadius.only(
-        bottomRight: Radius.circular(10),
-      );
-    }
-
-    if (index == length - 2) {
-      return const BorderRadius.only(
-        bottomLeft: Radius.circular(10),
-      );
-    }
-
-    return BorderRadius.zero;
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -59,14 +31,11 @@ class GridItem extends StatelessWidget {
             child: Container(
               color: Colors.black.withOpacity(0.3),
               child: isImage
-                  ? ImageViewAtom(imageUrl: itemUrl)
+                  ? ApodImageView(imageUrl: itemUrl)
                   : Center(
-                      child: Text(
+                      child: ApodText.body(
                         'this is a video.',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
             ),
@@ -75,25 +44,18 @@ class GridItem extends StatelessWidget {
               ? Positioned(
                   bottom: 25,
                   left: 10,
-                  child: Text(
+                  child: ApodText.bodySmallest(
                     label!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                      color: Color(0XFFFFFFFF),
-                    ),
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 )
               : const SizedBox.shrink(),
-          const Positioned(
+          Positioned(
             bottom: 10,
             left: 10,
-            child: Text(
+            child: ApodText.bodySmallest(
               '23/04/2023',
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0XFFFFFFFF),
-              ),
+              color: Theme.of(context).colorScheme.onBackground,
             ),
           ),
         ],

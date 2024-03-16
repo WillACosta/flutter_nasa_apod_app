@@ -1,2 +1,2 @@
-export 'atoms/atoms.dart';
-export 'layouts/layouts.dart';
+export 'components/components.dart';
+export 'tokens/tokens.dart';
