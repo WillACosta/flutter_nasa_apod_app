@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
 
 class ApodSearchView extends StatelessWidget {
-  const ApodSearchView({super.key});
+  final Function(String)? onChanged;
+  const ApodSearchView({super.key, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) {},
+      onChanged: onChanged,
       decoration: InputDecoration(
         hintText: 'search by title or date...',
         hintStyle: GoogleFonts.poppins(

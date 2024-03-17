@@ -13,7 +13,8 @@ class UiMediaModule extends Module {
     i
       ..add(MediaGalleryViewModel.new)
       ..add<ApodRepository>(CApodRepository.new)
-      ..add(GetMediasUseCase.new);
+      ..add(GetMediasUseCase.new)
+      ..add(ConvertDateTimeUseCase.new);
   }
 
   @override

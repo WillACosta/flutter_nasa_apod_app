@@ -7,7 +7,7 @@ final class MediaGalleryViewModel extends ViewModel {
 
   List<DomainMedia> mediaList = [];
 
-  void getMedias() async {
+  Future<void> getMedias() async {
     updateState(UiState.loading);
     final result = await _getMediasUseCase(GetMediasParams());
 

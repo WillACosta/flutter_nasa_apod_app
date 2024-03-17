@@ -8,10 +8,12 @@ import '../../../utils/utils.dart';
 void main() {
   late ApodRepository apodRepository;
   late GetMediasUseCase usecase;
+  late MockConvertDateTimeUseCase convertDateTimeUseCase;
 
   setUp(() {
     apodRepository = MockApodRepository();
-    usecase = GetMediasUseCase(apodRepository);
+    convertDateTimeUseCase = MockConvertDateTimeUseCase();
+    usecase = GetMediasUseCase(apodRepository, convertDateTimeUseCase);
   });
 
   group(
@@ -20,6 +22,8 @@ void main() {
       test(
         'should return Result<List<DomainMedia>> when call usecase method',
         () async {
+          when(() => convertDateTimeUseCase(any())).thenReturn('23 Dec 2023');
+
           when(
             () => apodRepository.getMedias(
               resultsCount: any(named: 'resultsCount'),
@@ -32,6 +36,7 @@ void main() {
 
           expect(actual.isSuccess(), true);
           expect(actual.getOrNull(), isA<List<DomainMedia>>());
+          verify(() => convertDateTimeUseCase(any()));
         },
       );
     },

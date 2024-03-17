@@ -7,12 +7,14 @@ class GridItem extends StatelessWidget {
     required this.index,
     required this.itemsLength,
     required this.itemUrl,
-    this.label,
+    required this.label,
+    required this.date,
     this.onTap,
     this.isImage = false,
   });
 
-  final String? label;
+  final String label;
+  final String date;
   final int index;
   final int itemsLength;
   final String itemUrl;
@@ -40,21 +42,19 @@ class GridItem extends StatelessWidget {
                     ),
             ),
           ),
-          label != null
-              ? Positioned(
-                  bottom: 28,
-                  left: 10,
-                  child: ApodText.bodySmallest(
-                    label!,
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                )
-              : const SizedBox.shrink(),
+          Positioned(
+            bottom: 28,
+            left: 10,
+            child: ApodText.bodySmallest(
+              label,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+          ),
           Positioned(
             bottom: 10,
             left: 10,
             child: ApodText.bodySmallest(
-              '23/04/2023',
+              date,
               color: Theme.of(context).colorScheme.onBackground,
             ),
           ),

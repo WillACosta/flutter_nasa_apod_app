@@ -25,10 +25,14 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
     super.initState();
   }
 
+  void _onChangeQueryString(String query) {
+    print(query);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: ApodColors.appBarDarkColor,
         elevation: 0,
@@ -39,7 +43,7 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
             child: Container(color: Colors.transparent),
           ),
         ),
-        title: const ApodSearchView(),
+        title: ApodSearchView(onChanged: _onChangeQueryString),
       ),
       body: Container(
         padding: ApodInsideSpacing.md,
@@ -49,8 +53,12 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
             final medias = _viewModel.mediaList;
 
             if (state == UiState.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return const MediaGalleryShimmer();
+            }
+
+            if (state == UiState.error) {
+              return PullToRefreshOnErrorLayout(
+                onRefresh: () => _viewModel.getMedias(),
               );
             }
 
@@ -63,19 +71,22 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
               );
             }
 
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemCount: medias.length,
-              itemBuilder: (_, index) => GridItem(
-                index: index,
-                label: medias[index].title,
-                itemsLength: medias.length,
-                isImage: medias[index].isImage,
-                itemUrl: medias[index].urls.defaultUrl,
+            return Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemCount: medias.length,
+                itemBuilder: (_, index) => GridItem(
+                  index: index,
+                  label: medias[index].title,
+                  date: medias[index].localDate ?? '',
+                  itemsLength: medias.length,
+                  isImage: medias[index].isImage,
+                  itemUrl: medias[index].urls.defaultUrl,
+                ),
               ),
             );
           },
