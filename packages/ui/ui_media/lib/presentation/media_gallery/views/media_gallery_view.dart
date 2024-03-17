@@ -26,13 +26,15 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
   }
 
   void _onChangeQueryString(String query) {
-    print(query);
+    setState(() {
+      _viewModel.searchMedia(query);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: ApodColors.appBarDarkColor,
         elevation: 0,
@@ -50,7 +52,7 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
         child: ValueListenableBuilder(
           valueListenable: _viewModel.state,
           builder: (_, state, __) {
-            final medias = _viewModel.mediaList;
+            final medias = _viewModel.searchResults;
 
             if (state == UiState.loading) {
               return const MediaGalleryShimmer();
@@ -71,22 +73,20 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
               );
             }
 
-            return Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: medias.length,
-                itemBuilder: (_, index) => GridItem(
-                  index: index,
-                  label: medias[index].title,
-                  date: medias[index].localDate ?? '',
-                  itemsLength: medias.length,
-                  isImage: medias[index].isImage,
-                  itemUrl: medias[index].urls.defaultUrl,
-                ),
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemCount: medias.length,
+              itemBuilder: (_, index) => GridItem(
+                index: index,
+                label: medias[index].title,
+                date: medias[index].localDate ?? '',
+                itemsLength: medias.length,
+                isImage: medias[index].isImage,
+                itemUrl: medias[index].urls.defaultUrl,
               ),
             );
           },
