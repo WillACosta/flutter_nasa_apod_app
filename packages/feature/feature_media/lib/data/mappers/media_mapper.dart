@@ -13,6 +13,7 @@ extension MediaMapper on NetworkMedia {
         defaultUrl: url,
       ),
       isImage: mediaType == 'image',
+      copyright: copyright,
     );
   }
 }

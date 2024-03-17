@@ -31,7 +31,7 @@ final class MediaGalleryViewModel extends ViewModel {
       final date = media.localDate!.toLowerCase();
       final conditions = [title, date].join(' ');
 
-      return conditions.contains(searchQuery);
+      return conditions.contains(searchQuery.toLowerCase());
     }).toList();
   }
 }

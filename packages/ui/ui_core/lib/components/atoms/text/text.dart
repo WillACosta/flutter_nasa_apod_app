@@ -44,6 +44,17 @@ class ApodText extends StatelessWidget {
     this.overflow,
   });
 
+  const ApodText.bodyHead(
+    this.text, {
+    super.key,
+    this.fontSize = 18,
+    this.color = const Color(0XFF000000),
+    this.fontWeight = FontWeight.bold,
+    this.textAlign = TextAlign.start,
+    this.softWrap,
+    this.overflow,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Text(

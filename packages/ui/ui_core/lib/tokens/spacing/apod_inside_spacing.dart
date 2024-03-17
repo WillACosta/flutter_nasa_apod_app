@@ -12,4 +12,6 @@ abstract class ApodInsideSpacing {
 
   /// from all sides 40
   static const EdgeInsets lg = EdgeInsets.all(40);
+
+  static const EdgeInsets xl = EdgeInsets.symmetric(vertical: 20, horizontal: 25);
 }

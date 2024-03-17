@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:core_commons/core_commons.dart';
 import 'package:core_dependencies/flutter_modular.dart';
+import 'package:feature_media/feature_media.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
+import 'package:ui_media/di/di.dart';
 import 'package:ui_media/presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
 
 import '../../search/search.dart';
@@ -29,6 +31,10 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
     setState(() {
       _viewModel.searchMedia(query);
     });
+  }
+
+  void _onTouchItem(DomainMedia media) {
+    Modular.to.pushNamed(ModuleRoutes.mediaDetail, arguments: media);
   }
 
   @override
@@ -82,6 +88,7 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
               itemCount: medias.length,
               itemBuilder: (_, index) => GridItem(
                 index: index,
+                onTap: () => _onTouchItem(medias[index]),
                 label: medias[index].title,
                 date: medias[index].localDate ?? '',
                 itemsLength: medias.length,
