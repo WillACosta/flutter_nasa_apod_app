@@ -28,7 +28,10 @@ final class MediaGalleryViewModel extends ViewModel {
   void searchMedia(String searchQuery) {
     searchResults = _mediaList.where((media) {
       final title = media.title.toLowerCase();
-      return title.contains(searchQuery);
+      final date = media.localDate!.toLowerCase();
+      final conditions = [title, date].join(' ');
+
+      return conditions.contains(searchQuery);
     }).toList();
   }
 }
