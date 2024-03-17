@@ -9,6 +9,7 @@ class ApodText extends StatelessWidget {
   final Color color;
   final TextAlign textAlign;
   final bool? softWrap;
+  final TextOverflow? overflow;
 
   const ApodText.bodySmallest(
     this.text, {
@@ -18,6 +19,7 @@ class ApodText extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.start,
     this.softWrap,
+    this.overflow,
   });
 
   const ApodText.bodySmall(
@@ -28,6 +30,7 @@ class ApodText extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.start,
     this.softWrap,
+    this.overflow,
   });
 
   const ApodText.body(
@@ -38,6 +41,7 @@ class ApodText extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.textAlign = TextAlign.start,
     this.softWrap,
+    this.overflow,
   });
 
   @override
@@ -46,6 +50,7 @@ class ApodText extends StatelessWidget {
       text,
       textAlign: textAlign,
       softWrap: softWrap,
+      overflow: overflow,
       style: GoogleFonts.poppins(
         color: color,
         fontSize: fontSize,

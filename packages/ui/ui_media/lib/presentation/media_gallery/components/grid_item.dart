@@ -48,6 +48,7 @@ class GridItem extends StatelessWidget {
             child: ApodText.bodySmallest(
               label,
               color: Theme.of(context).colorScheme.onBackground,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Positioned(
