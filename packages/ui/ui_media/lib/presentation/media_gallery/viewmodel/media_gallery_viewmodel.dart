@@ -1,17 +1,21 @@
 import 'package:core_commons/core_commons.dart';
 import 'package:feature_media/feature_media.dart';
+import 'package:flutter/widgets.dart';
 
 final class MediaGalleryViewModel extends ViewModel {
   final GetMediasUseCase _getMediasUseCase;
-
   MediaGalleryViewModel(this._getMediasUseCase);
 
   final List<DomainMedia> _mediaList = [];
+
+  ValueNotifier<bool> isLoadingMoreResults = ValueNotifier(false);
   List<DomainMedia> searchResults = [];
 
   Future<void> getMedias() async {
     if (_mediaList.isEmpty) {
-      updateState(UiState.loading);
+      updateState(LoadingUiState());
+    } else {
+      isLoadingMoreResults.value = true;
     }
 
     final result = await _getMediasUseCase(GetMediasParams());
@@ -20,10 +24,12 @@ final class MediaGalleryViewModel extends ViewModel {
       (list) {
         _mediaList.addAll(list);
         searchResults.addAll(list);
-        updateState(UiState.success);
+        updateState(SuccessUiState());
+        isLoadingMoreResults.value = false;
       },
       (failure) {
-        updateState(UiState.error);
+        updateState(ErrorUiState());
+        isLoadingMoreResults.value = false;
       },
     );
   }

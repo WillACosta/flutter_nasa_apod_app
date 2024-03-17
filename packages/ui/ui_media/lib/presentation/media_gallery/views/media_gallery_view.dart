@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:core_commons/core_commons.dart';
+import 'package:core_commons/state/state.dart';
 import 'package:core_dependencies/flutter_modular.dart';
 import 'package:feature_media/feature_media.dart';
 import 'package:flutter/material.dart';
@@ -81,17 +82,7 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
               builder: (_, state, __) {
                 final medias = _viewModel.searchResults;
 
-                if (state == UiState.loading) {
-                  return const MediaGalleryShimmer();
-                }
-
-                if (state == UiState.error) {
-                  return PullToRefreshOnErrorLayout(
-                    onRefresh: () => _viewModel.getMedias(),
-                  );
-                }
-
-                if (medias.isEmpty) {
+                if (medias.isEmpty && state is! IdleUiState) {
                   return Center(
                     child: ApodText.body(
                       'there is nothing here...',
@@ -100,26 +91,46 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
                   );
                 }
 
-                return GridView.builder(
-                  controller: _scrollController,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                  ),
-                  itemCount: medias.length,
-                  itemBuilder: (_, index) => GridItem(
-                    index: index,
-                    onTap: () => _onTouchItem(medias[index]),
-                    label: medias[index].title,
-                    date: medias[index].localDate ?? '',
-                    itemsLength: medias.length,
-                    isImage: medias[index].isImage,
-                    itemUrl: medias[index].urls.defaultUrl,
-                  ),
-                );
+                return switch (state) {
+                  LoadingUiState _ => const MediaGalleryShimmer(),
+                  ErrorUiState _ => PullToRefreshOnErrorLayout(
+                      onRefresh: () => _viewModel.getMedias(),
+                    ),
+                  _ => GridView.builder(
+                      controller: _scrollController,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
+                      itemCount: medias.length,
+                      itemBuilder: (_, index) => GridItem(
+                        index: index,
+                        onTap: () => _onTouchItem(medias[index]),
+                        label: medias[index].title,
+                        date: medias[index].localDate ?? '',
+                        itemsLength: medias.length,
+                        isImage: medias[index].isImage,
+                        itemUrl: medias[index].urls.defaultUrl,
+                      ),
+                    ),
+                };
               },
             ),
+          ),
+          ValueListenableBuilder(
+            valueListenable: _viewModel.isLoadingMoreResults,
+            builder: (_, isLoading, __) => isLoading
+                ? Positioned(
+                    bottom: 25,
+                    left: (MediaQuery.of(context).size.width / 2) - 20,
+                    child: const CircleAvatar(
+                      backgroundColor: Color(0xFF111111),
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ),
         ],
       ),
