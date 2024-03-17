@@ -21,10 +21,20 @@ class MediaGalleryView extends StatefulWidget {
 class _MediaGalleryViewState extends State<MediaGalleryView> {
   final _viewModel = Modular.get<MediaGalleryViewModel>();
 
+  late ScrollController _scrollController;
+
   @override
   void initState() {
     _viewModel.getMedias();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_triggerScroll);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   void _onChangeQueryString(String query) {
@@ -35,6 +45,15 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
 
   void _onTouchItem(DomainMedia media) {
     Modular.to.pushNamed(ModuleRoutes.mediaDetail, arguments: media);
+  }
+
+  void _triggerScroll() {
+    final isTheEndOfScrolling = _scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent;
+
+    if (isTheEndOfScrolling) {
+      _viewModel.getMedias();
+    }
   }
 
   @override
@@ -53,51 +72,56 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
         ),
         title: ApodSearchView(onChanged: _onChangeQueryString),
       ),
-      body: Container(
-        padding: ApodInsideSpacing.md,
-        child: ValueListenableBuilder(
-          valueListenable: _viewModel.state,
-          builder: (_, state, __) {
-            final medias = _viewModel.searchResults;
+      body: Stack(
+        children: [
+          Container(
+            padding: ApodInsideSpacing.md,
+            child: ValueListenableBuilder<UiState>(
+              valueListenable: _viewModel.state,
+              builder: (_, state, __) {
+                final medias = _viewModel.searchResults;
 
-            if (state == UiState.loading) {
-              return const MediaGalleryShimmer();
-            }
+                if (state == UiState.loading) {
+                  return const MediaGalleryShimmer();
+                }
 
-            if (state == UiState.error) {
-              return PullToRefreshOnErrorLayout(
-                onRefresh: () => _viewModel.getMedias(),
-              );
-            }
+                if (state == UiState.error) {
+                  return PullToRefreshOnErrorLayout(
+                    onRefresh: () => _viewModel.getMedias(),
+                  );
+                }
 
-            if (medias.isEmpty) {
-              return Center(
-                child: ApodText.body(
-                  'there is nothing here...',
-                  color: Theme.of(context).colorScheme.outline,
-                ),
-              );
-            }
+                if (medias.isEmpty) {
+                  return Center(
+                    child: ApodText.body(
+                      'there is nothing here...',
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                  );
+                }
 
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemCount: medias.length,
-              itemBuilder: (_, index) => GridItem(
-                index: index,
-                onTap: () => _onTouchItem(medias[index]),
-                label: medias[index].title,
-                date: medias[index].localDate ?? '',
-                itemsLength: medias.length,
-                isImage: medias[index].isImage,
-                itemUrl: medias[index].urls.defaultUrl,
-              ),
-            );
-          },
-        ),
+                return GridView.builder(
+                  controller: _scrollController,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                  ),
+                  itemCount: medias.length,
+                  itemBuilder: (_, index) => GridItem(
+                    index: index,
+                    onTap: () => _onTouchItem(medias[index]),
+                    label: medias[index].title,
+                    date: medias[index].localDate ?? '',
+                    itemsLength: medias.length,
+                    isImage: medias[index].isImage,
+                    itemUrl: medias[index].urls.defaultUrl,
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

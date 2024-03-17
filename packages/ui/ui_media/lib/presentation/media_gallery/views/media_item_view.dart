@@ -81,17 +81,20 @@ class _MediaItemViewState extends State<MediaItemView> {
                       ApodStackSpacing.lg,
                       if (media.copyright != null)
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ApodText.body(
                               'Copyright',
                               color: Theme.of(context).colorScheme.onBackground,
+                              fontWeight: FontWeight.bold,
                             ),
                             ApodText.body(
                               media.copyright!,
-                              color: Theme.of(context).colorScheme.onBackground,
+                              color: Theme.of(context).colorScheme.outline,
                             ),
+                            ApodStackSpacing.md,
                           ],
-                        )
+                        ),
                     ],
                   ),
                 ),

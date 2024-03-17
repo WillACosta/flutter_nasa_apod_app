@@ -6,17 +6,20 @@ final class MediaGalleryViewModel extends ViewModel {
 
   MediaGalleryViewModel(this._getMediasUseCase);
 
-  List<DomainMedia> _mediaList = [];
+  final List<DomainMedia> _mediaList = [];
   List<DomainMedia> searchResults = [];
 
   Future<void> getMedias() async {
-    updateState(UiState.loading);
+    if (_mediaList.isEmpty) {
+      updateState(UiState.loading);
+    }
+
     final result = await _getMediasUseCase(GetMediasParams());
 
     result.fold(
       (list) {
-        _mediaList = list;
-        searchResults = list;
+        _mediaList.addAll(list);
+        searchResults.addAll(list);
         updateState(UiState.success);
       },
       (failure) {
