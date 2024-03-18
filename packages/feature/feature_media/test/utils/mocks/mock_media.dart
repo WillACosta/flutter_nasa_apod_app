@@ -26,4 +26,18 @@ abstract class MockMedia {
 
   static const networkMediaList = [networkMedia];
   static final domainMediaList = [domainMedia];
+
+  static const networkMediaListString = '''
+  [{
+   "title":"Nasa Space Image",
+   "explanation":"something",
+   "date":"2012-02-27",
+   "media_type":"image",
+   "url":"http://fakeimage.url",
+   "hdUrl":"http://fakeimage.hd.url",
+   "copyright":null
+   }]
+  ''';
+
+
 }

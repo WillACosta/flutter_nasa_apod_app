@@ -21,7 +21,7 @@ class FeatureMediaModule extends Module {
     i
       ..add(MediaGalleryViewModel.new)
       ..add<ApodRepository>(CApodRepository.new)
-      ..add<ApodLocalRepository>(CApodLocalStorage.new)
+      ..add<ApodLocalRepository>(CApodLocalRepository.new)
       ..add(GetMediasUseCase.new)
       ..add(ConvertDateTimeUseCase.new);
   }

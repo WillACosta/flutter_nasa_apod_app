@@ -10,6 +10,12 @@ void main() {
   late GetMediasUseCase usecase;
   late MockConvertDateTimeUseCase convertDateTimeUseCase;
 
+  setUpAll(
+    () => registerFallbackValue(
+      ConvertDateTimeParams(date: DateTime.parse('2023-12-23T14:00:00-0500')),
+    ),
+  );
+
   setUp(() {
     apodRepository = MockApodRepository();
     convertDateTimeUseCase = MockConvertDateTimeUseCase();

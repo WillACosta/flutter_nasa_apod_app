@@ -7,7 +7,7 @@ import 'package:core_network/core_network.dart';
 
 import 'apod_local_repository.dart';
 
-class CApodLocalStorage implements ApodLocalRepository {
+class CApodLocalRepository implements ApodLocalRepository {
   static const _storageKey = '@medias';
 
   @override
