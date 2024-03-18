@@ -1,7 +1,6 @@
 ### @cloudwalk-mobile-test
 
-This Apod application, provides a showcase of using NASA's APOD (Astronomic Picture of The Day) API for for show awesome pictures of the universe, made with Dart/Flutter 💙. Here you'll
-find concepts such as Clean Architecture, Clean Code, SOLID and another things related to the best coding practices.
+This application, provides a showcase of using NASA's APOD (Astronomic Picture of The Day) API for show awesome pictures of the universe, made with Dart/Flutter 💙. Here you'll find concepts such as Clean Architecture, Clean Code, SOLID and other things related to the best coding practices.
 
 #
 
@@ -18,7 +17,7 @@ find concepts such as Clean Architecture, Clean Code, SOLID and another things r
 
 ## Features and Architecture
 
-The project has only one main feature called: `:feature_media`, that holds the business rule for retrieve media itens from Nasa's Open API and handle the results accordingly. You can find out more details in the next section.
+The project has only one main feature called: `:feature_media`, that holds the business rule for retrieve media items from Nasa's Open API and handle the results accordingly. You can find out more details in the next section.
 
 ![An image of app feature flow](docs/images/apod_flow.png "An image of app feature flow")
 
