@@ -34,12 +34,6 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Code generation files
-*.g.dart
-*.freezed.dart
-*.config.dart
-*.chopper.dart
-
 # Coverage related
 coverage/
 coverage_report/
