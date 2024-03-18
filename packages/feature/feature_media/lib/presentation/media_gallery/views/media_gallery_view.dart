@@ -95,9 +95,11 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
                     ),
                   _ => GridView.builder(
                       controller: _scrollController,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: MediaQuery.orientationOf(context) ==
+                                Orientation.portrait
+                            ? 2
+                            : 3,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
                       ),
