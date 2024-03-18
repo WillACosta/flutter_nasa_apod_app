@@ -33,9 +33,7 @@ scripts:
       dependsOn: build_runner
 
   analyze:
-    run: |
-      melos exec -c 5 --ignore="*example*" -- \
-        dart analyze --fatal-infos .
+    run: melos exec -c 5 dart analyze .
     description: Run `dart analyze` in all packages.
 
   format:

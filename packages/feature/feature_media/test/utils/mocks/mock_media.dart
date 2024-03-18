@@ -38,6 +38,4 @@ abstract class MockMedia {
    "copyright":null
    }]
   ''';
-
-
 }
