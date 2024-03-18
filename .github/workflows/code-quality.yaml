@@ -25,13 +25,11 @@ jobs:
           channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
 
       - name: Create .env file
-        run: cd apps/shell && touch .env
+        run: cd apps/apod && touch .env
         shell: bash
 
       - name: Setup tools
-        run: |
-          dart pub global activate melos
-          dart pub global activate remove_from_coverage
+        run: dart pub global activate melos
 
       - name: Clean Workspace
         run: melos clean
