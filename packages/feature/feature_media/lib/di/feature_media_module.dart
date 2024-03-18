@@ -36,6 +36,13 @@ class FeatureMediaModule extends Module {
           final param = r.args.data as DomainMedia;
           return MediaItemView(media: param);
         },
+      )
+      ..child(
+        ModuleRoutes.mediaPreviewFullScreen,
+        child: (_) {
+          final param = r.args.data as String;
+          return MediaPreview(url: param);
+        },
       );
   }
 }

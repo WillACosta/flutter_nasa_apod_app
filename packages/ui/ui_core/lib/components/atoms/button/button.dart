@@ -38,14 +38,14 @@ class ApodButton extends StatelessWidget {
         onPressed: onPressed,
         child: Row(
           mainAxisSize: fullWidth ? MainAxisSize.max : MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ApodText.body(
               labelText,
               color: Theme.of(context).colorScheme.onBackground,
             ),
-            ApodStackSpacing.xxs,
+            const SizedBox(width: 8),
             if (_hasIcon) Icon(icon!),
           ],
         ),

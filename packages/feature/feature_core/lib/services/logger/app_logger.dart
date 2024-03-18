@@ -13,14 +13,14 @@ class AppLogger {
       _logger.severe(message, error, st);
 
   void warning(Object? message, [Object? error, StackTrace? st]) =>
-      _logger.severe(message, error, st);
+      _logger.warning(message, error, st);
 
   void info(Object? message, [Object? error, StackTrace? st]) =>
-      _logger.severe(message, error, st);
+      _logger.info(message, error, st);
 
   void config(Object? message, [Object? error, StackTrace? st]) =>
-      _logger.severe(message, error, st);
+      _logger.config(message, error, st);
 
   void fine(Object? message, [Object? error, StackTrace? st]) =>
-      _logger.severe(message, error, st);
+      _logger.fine(message, error, st);
 }

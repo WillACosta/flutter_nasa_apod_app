@@ -1,13 +1,15 @@
 import 'dart:ui';
 
+import 'package:core_dependencies/flutter_modular.dart';
 import 'package:feature_media/feature_media.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
 
-class MediaItemView extends StatefulWidget {
-  const MediaItemView({super.key, required this.media});
+import 'video_media_view.dart';
 
+class MediaItemView extends StatefulWidget {
   final DomainMedia media;
+  const MediaItemView({super.key, required this.media});
 
   @override
   State<MediaItemView> createState() => _MediaItemViewState();
@@ -15,6 +17,10 @@ class MediaItemView extends StatefulWidget {
 
 class _MediaItemViewState extends State<MediaItemView> {
   DomainMedia get media => widget.media;
+
+  void _navigateToFullScreenView(String url) {
+    Modular.to.pushNamed(ModuleRoutes.mediaPreviewFullScreen, arguments: url);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +37,20 @@ class _MediaItemViewState extends State<MediaItemView> {
           ),
         ),
         automaticallyImplyLeading: true,
-        actions: const [],
+        actions: [
+          if (media.isImage)
+            IconButton(
+              onPressed: () => _navigateToFullScreenView(media.urls.defaultUrl),
+              icon: const Icon(ApodIcons.fullScreen),
+            ),
+        ],
       ),
       body: Stack(
         fit: StackFit.expand,
         children: [
           media.isImage
               ? ApodImageView(imageUrl: media.urls.defaultUrl)
-              : Center(
-                  child: ApodText.body(
-                    'this is a video.',
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                ),
+              : VideoMediaView(url: media.urls.defaultUrl),
           DraggableScrollableSheet(
             initialChildSize: 0.3,
             minChildSize: 0.2,
