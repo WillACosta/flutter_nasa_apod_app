@@ -154,3 +154,22 @@ melos test
 ```
 
 You can find more scripts to execute in `melos.yaml` file.
+
+## Usage of Json Server
+
+In the case of Nasa's Open API is not available, you can use the [Json Server](https://github.com/typicode/json-server) for testing purposes.
+
+- First of all, you need to setup the NodeJS environment -- see here: https://nodejs.org/en/download
+
+- After that, navigate to the json-api directory: `/api` and run:
+
+```shell
+npx json-server database.json
+```
+
+- Then you will need to change the APOD_BASE_URL from `.env` file,
+  for using the local server address, for example:
+
+```
+http://localhost:3000
+```
