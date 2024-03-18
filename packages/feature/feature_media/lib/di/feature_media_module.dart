@@ -1,19 +1,27 @@
 import 'package:core_dependencies/flutter_modular.dart';
 import 'package:core_di/core_di.dart';
-import 'package:feature_media/feature_media.dart';
-import 'package:ui_media/presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
-import 'package:ui_media/presentation/media_gallery/views/media_item_view.dart';
-import 'package:ui_media/ui_media.dart';
+import 'package:feature_core/feature_core.dart';
 
-class UiMediaModule extends Module {
+import '../data/data.dart';
+import '../domain/domain.dart';
+import '../presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
+import '../presentation/media_gallery/views/media_item_view.dart';
+import '../presentation/presentation.dart';
+import 'module_routes.dart';
+
+class FeatureMediaModule extends Module {
   @override
-  List<Module> get imports => [CommonDependenciesModule()];
+  List<Module> get imports => [
+        CommonDependenciesModule(),
+        FeatureCoreModule(),
+      ];
 
   @override
   void binds(Injector i) {
     i
       ..add(MediaGalleryViewModel.new)
       ..add<ApodRepository>(CApodRepository.new)
+      ..add<ApodLocalRepository>(CApodLocalStorage.new)
       ..add(GetMediasUseCase.new)
       ..add(ConvertDateTimeUseCase.new);
   }

@@ -4,10 +4,9 @@ import 'package:core_commons/core_commons.dart';
 import 'package:core_commons/state/state.dart';
 import 'package:core_dependencies/flutter_modular.dart';
 import 'package:feature_media/feature_media.dart';
+import 'package:feature_media/presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
-import 'package:ui_media/di/di.dart';
-import 'package:ui_media/presentation/media_gallery/viewmodel/media_gallery_viewmodel.dart';
 
 import '../../search/search.dart';
 import '../components/components.dart';
@@ -48,11 +47,12 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
     Modular.to.pushNamed(ModuleRoutes.mediaDetail, arguments: media);
   }
 
-  void _triggerScroll() {
+  Future<void> _triggerScroll() async {
+    final hasConnection = await _viewModel.verifyNetworkConnection();
     final isTheEndOfScrolling = _scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent;
 
-    if (isTheEndOfScrolling) {
+    if (isTheEndOfScrolling && hasConnection) {
       _viewModel.getMedias();
     }
   }
@@ -82,12 +82,9 @@ class _MediaGalleryViewState extends State<MediaGalleryView> {
               builder: (_, state, __) {
                 final medias = _viewModel.searchResults;
 
-                if (medias.isEmpty && state is! IdleUiState) {
-                  return Center(
-                    child: ApodText.body(
-                      'there is nothing here...',
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
+                if (medias.isEmpty && state is SuccessUiState) {
+                  return PullToRefreshOnErrorLayout(
+                    onRefresh: () => _viewModel.getMedias(),
                   );
                 }
 

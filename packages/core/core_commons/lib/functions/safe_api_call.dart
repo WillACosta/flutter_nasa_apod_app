@@ -17,7 +17,7 @@ Future<Result<T, AppFailure>> safeApiCall<T extends Object>(
     }
 
     return failureOf(UnexpectedFailure());
-  } on SocketException catch (e) {
+  } on SocketException {
     return failureOf(NoConnectionFailure());
   } catch (e) {
     return failureOf(UnexpectedFailure());

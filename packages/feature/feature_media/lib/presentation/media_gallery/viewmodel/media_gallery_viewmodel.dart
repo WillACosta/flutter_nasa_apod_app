@@ -1,15 +1,25 @@
 import 'package:core_commons/core_commons.dart';
+import 'package:feature_core/feature_core.dart';
 import 'package:feature_media/feature_media.dart';
 import 'package:flutter/widgets.dart';
 
 final class MediaGalleryViewModel extends ViewModel {
   final GetMediasUseCase _getMediasUseCase;
-  MediaGalleryViewModel(this._getMediasUseCase);
+  final NetworkActivityService _networkActivityService;
+
+  MediaGalleryViewModel(
+    this._getMediasUseCase,
+    this._networkActivityService,
+  );
 
   final List<DomainMedia> _mediaList = [];
 
   ValueNotifier<bool> isLoadingMoreResults = ValueNotifier(false);
   List<DomainMedia> searchResults = [];
+
+  Future<bool> verifyNetworkConnection() {
+    return _networkActivityService.hasConnection();
+  }
 
   Future<void> getMedias() async {
     if (_mediaList.isEmpty) {

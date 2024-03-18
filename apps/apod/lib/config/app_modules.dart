@@ -1,9 +1,9 @@
 import 'package:core_dependencies/flutter_modular.dart';
-import 'package:ui_media/ui_media.dart';
+import 'package:feature_media/feature_media.dart';
 
 class AppModule extends Module {
   @override
   void routes(RouteManager r) {
-    r.module('/', module: UiMediaModule());
+    r.module('/', module: FeatureMediaModule());
   }
 }

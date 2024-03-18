@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:core_dependencies/equatable.dart';
 
 class NetworkMedia extends Equatable {
@@ -38,5 +40,30 @@ class NetworkMedia extends Equatable {
 
   static List<NetworkMedia> fromList(List source) {
     return source.map((e) => NetworkMedia.fromMap(e)).toList();
+  }
+
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
+
+    result.addAll({'title': title});
+    result.addAll({'explanation': explanation});
+    result.addAll({'date': date});
+    result.addAll({'media_type': mediaType});
+    result.addAll({'url': url});
+
+    if (hdUrl != null) {
+      result.addAll({'hdUrl': hdUrl});
+    }
+
+    if (copyright != null) {
+      result.addAll({'copyright': copyright});
+    }
+
+    return result;
+  }
+
+  static String toJsonStringList(List<NetworkMedia> medias) {
+    final mappedMedias = medias.map((e) => e.toMap()).toList();
+    return jsonEncode(mappedMedias);
   }
 }

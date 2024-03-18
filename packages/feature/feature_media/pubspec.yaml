@@ -20,6 +20,15 @@ dependencies:
   core_network:
     path: "../../core/core_network"
 
+  core_di:
+    path: "../../core/core_di"
+
+  ui_core:
+    path: "../../ui/ui_core"
+
+  feature_core:
+    path: "../feature_core"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

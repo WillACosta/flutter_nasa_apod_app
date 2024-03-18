@@ -15,8 +15,11 @@ dependencies:
   core_dependencies:
     path: "../../packages/core/core_dependencies"
 
-  ui_media:
-    path: "../../packages/ui/ui_media"
+  feature_media:
+    path: "../../packages/feature/feature_media"
+
+  feature_core:
+    path: "../../packages/feature/feature_core"
 
   ui_core:
     path: "../../packages/ui/ui_core"

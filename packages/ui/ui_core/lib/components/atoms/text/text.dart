@@ -1,4 +1,3 @@
-import 'package:core_dependencies/google_fonts.dart';
 import 'package:flutter/widgets.dart';
 
 class ApodText extends StatelessWidget {
@@ -62,7 +61,9 @@ class ApodText extends StatelessWidget {
       textAlign: textAlign,
       softWrap: softWrap,
       overflow: overflow,
-      style: GoogleFonts.poppins(
+      style: TextStyle(
+        fontFamily: 'Poppins',
+        package: 'core_ui',
         color: color,
         fontSize: fontSize,
         fontWeight: fontWeight,

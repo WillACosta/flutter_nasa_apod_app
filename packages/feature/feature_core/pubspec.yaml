@@ -1,5 +1,5 @@
-name: ui_media
-description: apod media user interfaces
+name: feature_core
+description: Common code and structure for features
 publish_to: none
 version: 0.0.1
 
@@ -11,20 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  core_commons:
-    path: "../../core/core_commons"
-
   core_dependencies:
     path: "../../core/core_dependencies"
 
-  core_di:
-    path: "../../core/core_di"
-
-  feature_media:
-    path: "../../feature/feature_media"
-
-  ui_core:
-    path: "../ui_core"
+  core_commons:
+    path: "../../core/core_commons"
 
 dev_dependencies:
   flutter_test:

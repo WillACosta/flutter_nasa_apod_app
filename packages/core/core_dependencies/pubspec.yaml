@@ -22,5 +22,8 @@ dependencies:
   feather_icons: ^1.2.0
   google_fonts: ^4.0.4
   flutter_modular: ^6.3.2
+  shared_preferences: ^2.2.2
+  internet_connection_checker: ^1.0.0+1
+  logging: ^1.2.0
 
 flutter:
